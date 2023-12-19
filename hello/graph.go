@@ -77,5 +77,15 @@ func (g *GraphNode) Insert(a, b int, bi bool) {
 
 func (g *GraphNode) Delete(a int) {
 	delete(g.Edges, a)
+	stack := []int{a}
+	for len(stack) > 0 {
+		val := stack[0]
+		stack = stack[1:]
+		for index, value := range g.Edges[val] {
+			stack = append(stack, value)
+			if value == a {
+				g.Edges[val] = append(g.Edges[val][:index], g.Edges[val][index+1:]...)
+			}
+		}
+	}
 }
-
