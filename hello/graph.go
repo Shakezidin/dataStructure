@@ -25,25 +25,24 @@ func (g *GraphNode) BFS(value int) {
 	}
 }
 
-func (g *GraphNode) DFS(startVertex int) {
-    visited := make(map[int]bool)
-    stack := []int{startVertex}
+func (g *GraphNode) DFS(value int) {
+	visited := make(map[int]bool)
+	visited[value] = true
+	stack := []int{value}
+	g.DfsHelper(visited, stack)
+}
 
-    for len(stack) > 0 {
-        vertex := stack[len(stack)-1]
-        stack = stack[:len(stack)-1]
-
-        if !visited[vertex] {
-            visited[vertex] = true
-            fmt.Println(vertex)
-
-            for _, neighbor := range g.Edges[vertex] {
-                if !visited[neighbor] {
-                    stack = append(stack, neighbor)
-                }
-            }
-        }
-    }
+func (g *GraphNode) DfsHelper(visited map[int]bool, stack []int) {
+	if len(stack) == 0 {
+		return
+	}
+	val := stack[len(stack)-1]
+	stack = stack[:len(stack)-1]
+	for _, i := range g.Edges[val] {
+		visited[i] = true
+		stack = append(stack, i)
+		g.DfsHelper(visited, stack)
+	}
 }
 
 func (g *GraphNode) pathExist(a, b int) bool {
