@@ -19,7 +19,7 @@ func (g *GraphNode) BFS(value int) {
 		for _, i := range g.Edges[val] {
 			if !visited[i] {
 				visited[i] = true
-				arr = append(arr, val)
+				arr = append(arr, i)
 			}
 		}
 	}
@@ -36,8 +36,8 @@ func (g *GraphNode) DfsHelper(visited map[int]bool, stack []int) {
 	if len(stack) == 0 {
 		return
 	}
-	val := stack[0]
-	stack = stack[1:]
+	val := stack[len(stack)-1]
+	stack = stack[:len(stack)-1]
 	for _, i := range g.Edges[val] {
 		visited[i] = true
 		stack = append(stack, i)
