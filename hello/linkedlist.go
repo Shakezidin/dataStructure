@@ -165,6 +165,21 @@ func (l *LinkedList) DeleteDuplicates() {
 	}
 }
 
+func (l *LinkedList) Reverse() {
+	current := l.Head
+	var prev *node
+	var next *node
+
+	for current != nil {
+		next = current.Next
+		current.Next = prev
+		prev = current
+		current = next
+	}
+
+	l.Head = prev
+}
+
 func (l *LinkedList) Display() {
 	current := l.Head
 	for current != nil {

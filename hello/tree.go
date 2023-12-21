@@ -89,7 +89,7 @@ func (t *Tree) Contains(data int) bool {
 			current = current.Right
 		} else if data < current.Data {
 			current = current.Left
-		} else {
+		} else if current.Data == data {
 			return true
 		}
 	}
