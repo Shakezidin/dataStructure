@@ -32,6 +32,13 @@ func (t *Trie) Contains(str string) bool {
 	return true
 }
 
+func (t *Trie) Suffix(str string) {
+	for i := 0; i < len(str); i++ {
+		strrr := str[i:]
+		t.Insert(strrr)
+	}
+}
+
 func (t *Trie) Delete(word string) {
 	t.deleteHelper(t.Root, word, 0)
 }

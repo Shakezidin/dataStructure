@@ -25,23 +25,24 @@ func (g *GraphNode) BFS(value int) {
 	}
 }
 
-func (g *GraphNode) DFS(value int) {
+func (g *GraphNode) DFStraversa(value int) {
+	fmt.Println(value)
 	visited := make(map[int]bool)
-	visited[value] = true
-	stack := []int{value}
-	g.DfsHelper(visited, stack)
+	g.DFS(value, visited)
 }
 
-func (g *GraphNode) DfsHelper(visited map[int]bool, stack []int) {
-	if len(stack) == 0 {
+func (g *GraphNode) DFS(value int, visited map[int]bool) {
+	arr := g.Edges[value]
+	if len(arr) == 0 {
 		return
 	}
-	val := stack[len(stack)-1]
-	stack = stack[:len(stack)-1]
-	for _, i := range g.Edges[val] {
-		visited[i] = true
-		stack = append(stack, i)
-		g.DfsHelper(visited, stack)
+
+	visited[value] = true
+	for _, val := range arr {
+		if !visited[val] {
+			fmt.Println(val)
+			g.DFS(val, visited)
+		}
 	}
 }
 
