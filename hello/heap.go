@@ -25,10 +25,10 @@ func (h *Heap) HeapifyDown(index int) {
 		left := LeftChild(smallest)
 		right := RightChild(smallest)
 
-		if h.arr[smallest] < h.arr[left] && len(h.arr) < left {
+		if left < len(h.arr) && h.arr[smallest] < h.arr[left] {
 			smallest = left
 		}
-		if h.arr[smallest] < h.arr[right] && len(h.arr) < right {
+		if right < len(h.arr) && h.arr[smallest] < h.arr[right] {
 			smallest = right
 		}
 
